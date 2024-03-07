@@ -1,6 +1,10 @@
 package game
 
-import "github.com/hajimehoshi/ebiten/v2"
+import (
+	"main/assets"
+
+	"github.com/hajimehoshi/ebiten/v2"
+)
 
 type Game struct {
 }
@@ -15,7 +19,7 @@ func (g *Game) Update() error {
 }
 
 func (g *Game) Draw(screen *ebiten.Image) {
-
+	screen.DrawImage(assets.Tilemap, &ebiten.DrawImageOptions{})
 }
 
 func (g *Game) Layout(outsideWidth, outsideHeight int) (int, int) {

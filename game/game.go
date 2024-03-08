@@ -74,10 +74,6 @@ func (g *Game) Draw(screen *ebiten.Image) {
 	w := assets.Tilemap.Bounds().Dx()
 	tileXCount := w / tileSize
 
-	// Draw each tile with each DrawImage call.
-	// As the source images of all DrawImage calls are always same,
-	// this rendering is done very efficiently.
-	// For more detail, see https://pkg.go.dev/github.com/hajimehoshi/ebiten/v2#Image.DrawImage
 	const xCount = screenWidth / tileSize
 	for _, l := range g.layers {
 		for i, t := range l {

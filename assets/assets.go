@@ -9,6 +9,9 @@ import (
 	"github.com/hajimehoshi/ebiten/v2"
 )
 
+type Assets struct {
+}
+
 //go:embed *
 var assets embed.FS
 

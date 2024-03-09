@@ -28,18 +28,14 @@ func NewGame() *Game {
 				0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 				0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 				0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-				0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-				0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-				0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 			},
-			{},
+			{
+				0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+				0, 0, 0, 260, 0, 0, 0,
+			},
 		},
 	}
 	return g
-}
-
-func (g *Game) Update() error {
-	return nil
 }
 
 const (
@@ -51,6 +47,10 @@ const (
 	tileSize = 16
 )
 
+func (g *Game) Update() error {
+	return nil
+}
+
 func (g *Game) Draw(screen *ebiten.Image) {
 	screen.Fill(color.White)
 	w := assets.Tilemap.Bounds().Dx()
@@ -60,7 +60,7 @@ func (g *Game) Draw(screen *ebiten.Image) {
 	for _, l := range g.layers {
 		for i, t := range l {
 			op := &ebiten.DrawImageOptions{}
-			op.GeoM.Translate(float64((i%xCount)*tileSize), float64((i/xCount)*tileSize))
+			op.GeoM.Translate(float64((i%xCount)*tileSize), float64((i/xCount)*tileSize)+290)
 
 			sx := (t % tileXCount) * tileSize
 			sy := (t / tileXCount) * tileSize

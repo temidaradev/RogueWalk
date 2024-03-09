@@ -15,9 +15,10 @@ type Assets struct {
 //go:embed *
 var assets embed.FS
 
-var TilemapBackground = getSingleImage("Sprites/tilemap-backgrounds.png")
-var TilemapChars = getSingleImage("Sprites/tilemap-characters.png")
 var Tilemap = getSingleImage("Sprites/tilemap.png")
+
+//go:embed Fonts/AvenirNext-DemiBoldItalic.ttf
+var AvenirNext_ttf []byte
 
 func getSingleImage(name string) *ebiten.Image {
 	f, err := assets.Open(name)

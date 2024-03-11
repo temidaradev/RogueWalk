@@ -46,7 +46,7 @@ func (g *Game) Update() error {
 }
 
 func (g *Game) Draw(screen *ebiten.Image) {
-	screen.Fill(color.White)
+	screen.Fill(color.RGBA{40, 40, 40, 255})
 	w := assets.Tilemap.Bounds().Dx()
 	tileXCount := w / tileSize
 

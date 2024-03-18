@@ -41,7 +41,7 @@ func (g *Game) Draw(screen *ebiten.Image) {
 	for _, l := range g.layers {
 		for i, t := range l {
 			op := &ebiten.DrawImageOptions{}
-			op.GeoM.Translate(float64((i%xCount)*tileSize), float64((i/xCount)*tileSize)+340)
+			op.GeoM.Translate(float64((i%xCount)*tileSize), float64((i/xCount)*tileSize))
 
 			sx := (t % tileXCount) * tileSize
 			sy := (t / tileXCount) * tileSize

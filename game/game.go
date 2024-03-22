@@ -6,18 +6,23 @@ import (
 	"main/assets"
 
 	"github.com/hajimehoshi/ebiten/v2"
+	"github.com/hajimehoshi/ebiten/v2/inpututil"
 )
 
 type Game struct {
 	layers [][]int
+	m      *menu
 }
 
 func NewGame() *Game {
 	g := &Game{
 		assets.L.Layers,
+		&menu{},
 	}
 	return g
 }
+
+var isStarted bool
 
 const (
 	screenWidth  = 640
@@ -29,23 +34,30 @@ const (
 )
 
 func (g *Game) Update() error {
+	if inpututil.IsKeyJustPressed(ebiten.KeyEnter) {
+		isStarted = true
+	}
 	return nil
 }
 
 func (g *Game) Draw(screen *ebiten.Image) {
-	screen.Fill(color.RGBA{40, 40, 40, 255})
-	w := assets.Tilemap.Bounds().Dx()
-	tileXCount := w / tileSize
+	if !isStarted {
+		g.m.Draw(screen)
+	} else {
+		screen.Fill(color.RGBA{40, 40, 40, 255})
+		w := assets.Tilemap.Bounds().Dx()
+		tileXCount := w / tileSize
 
-	const xCount = screenWidth / tileSize
-	for _, l := range g.layers {
-		for i, t := range l {
-			op := &ebiten.DrawImageOptions{}
-			op.GeoM.Translate(float64((i%xCount)*tileSize), float64((i/xCount)*tileSize))
+		const xCount = screenWidth / tileSize
+		for _, l := range g.layers {
+			for i, t := range l {
+				op := &ebiten.DrawImageOptions{}
+				op.GeoM.Translate(float64((i%xCount)*tileSize), float64((i/xCount)*tileSize))
 
-			sx := (t % tileXCount) * tileSize
-			sy := (t / tileXCount) * tileSize
-			screen.DrawImage(assets.Tilemap.SubImage(image.Rect(sx, sy, sx+tileSize, sy+tileSize)).(*ebiten.Image), op)
+				sx := (t % tileXCount) * tileSize
+				sy := (t / tileXCount) * tileSize
+				screen.DrawImage(assets.Tilemap.SubImage(image.Rect(sx, sy, sx+tileSize, sy+tileSize)).(*ebiten.Image), op)
+			}
 		}
 	}
 }

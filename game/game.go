@@ -13,6 +13,7 @@ type Game struct {
 	layers [][]int
 	m      *menu
 	p      *Player
+	c      *camera
 }
 
 func NewGame() *Game {
@@ -20,7 +21,9 @@ func NewGame() *Game {
 		assets.L.Layers,
 		&menu{},
 		&Player{},
+		&camera{},
 	}
+	g.c.init()
 	return g
 }
 
@@ -40,6 +43,7 @@ func (g *Game) Update() error {
 		isStarted = true
 	}
 	g.p.Update()
+	g.c.setPos(g.p.player.x/unit-320, g.p.player.y/unit-240)
 	return nil
 }
 
@@ -47,7 +51,7 @@ func (g *Game) Draw(screen *ebiten.Image) {
 	if !isStarted {
 		g.m.Draw(screen)
 	} else {
-		screen.Fill(color.RGBA{40, 40, 40, 255})
+		screen.Fill(color.RGBA{133, 198, 106, 255})
 		w := assets.Tilemap.Bounds().Dx()
 		tileXCount := w / tileSize
 
@@ -59,11 +63,13 @@ func (g *Game) Draw(screen *ebiten.Image) {
 
 				sx := (t % tileXCount) * tileSize
 				sy := (t / tileXCount) * tileSize
-				screen.DrawImage(assets.Tilemap.SubImage(image.Rect(sx, sy, sx+tileSize, sy+tileSize)).(*ebiten.Image), op)
+				g.c.draw(assets.Tilemap.SubImage(image.Rect(sx, sy, sx+tileSize, sy+tileSize)).(*ebiten.Image), op)
 			}
 		}
-		g.p.Draw(screen)
+		g.p.Draw(screen, g.c)
 	}
+	g.c.render(screen)
+	g.c.clear()
 }
 
 func (g *Game) Layout(outsideWidth, outsideHeight int) (int, int) {

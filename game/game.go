@@ -39,12 +39,12 @@ func (g *Game) Update() error {
 	if inpututil.IsKeyJustPressed(ebiten.KeyEnter) {
 		isStarted = true
 	}
+	g.p.Update()
 	return nil
 }
 
 func (g *Game) Draw(screen *ebiten.Image) {
 	if !isStarted {
-		g.p.Draw(screen)
 		g.m.Draw(screen)
 	} else {
 		screen.Fill(color.RGBA{40, 40, 40, 255})
@@ -62,6 +62,7 @@ func (g *Game) Draw(screen *ebiten.Image) {
 				screen.DrawImage(assets.Tilemap.SubImage(image.Rect(sx, sy, sx+tileSize, sy+tileSize)).(*ebiten.Image), op)
 			}
 		}
+		g.p.Draw(screen)
 	}
 }
 

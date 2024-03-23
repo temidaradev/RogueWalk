@@ -7,6 +7,7 @@ import (
 	"log"
 
 	"github.com/hajimehoshi/ebiten/v2"
+	"github.com/lafriks/go-tiled"
 )
 
 type Assets struct {
@@ -81,4 +82,27 @@ func getSingleImage(name string) *ebiten.Image {
 	}
 
 	return ebiten.NewImageFromImage(img)
+}
+
+func mustSubImage(tileSetImage *ebiten.Image, ts tiled.Tileset, id uint32) *ebiten.Image {
+	width := ts.TileWidth
+	height := ts.TileHeight
+
+	col := int(id) % ts.Columns
+	row := int(id) / ts.Columns
+
+	// Plus one because of 1px margin
+	if col > 0 {
+		width += 1
+	}
+	if row > 0 {
+		height += 1
+	}
+
+	sx := col * width
+	sy := row * height
+
+	return tileSetImage.SubImage(
+		image.Rect(sx, sy, sx+ts.TileWidth, sy+ts.TileHeight),
+	).(*ebiten.Image)
 }

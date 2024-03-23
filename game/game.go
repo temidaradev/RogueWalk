@@ -12,12 +12,14 @@ import (
 type Game struct {
 	layers [][]int
 	m      *menu
+	p      *Player
 }
 
 func NewGame() *Game {
 	g := &Game{
 		assets.L.Layers,
 		&menu{},
+		&Player{},
 	}
 	return g
 }
@@ -42,6 +44,7 @@ func (g *Game) Update() error {
 
 func (g *Game) Draw(screen *ebiten.Image) {
 	if !isStarted {
+		g.p.Draw(screen)
 		g.m.Draw(screen)
 	} else {
 		screen.Fill(color.RGBA{40, 40, 40, 255})

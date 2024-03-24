@@ -28,6 +28,7 @@ func NewGame() *Game {
 }
 
 var isStarted bool
+var zoomIn, zoomOut bool
 
 const (
 	screenWidth  = 640
@@ -41,6 +42,12 @@ const (
 func (g *Game) Update() error {
 	if inpututil.IsKeyJustPressed(ebiten.KeyEnter) {
 		isStarted = true
+	}
+	if inpututil.IsKeyJustPressed(ebiten.KeyArrowUp) {
+		zoomIn = true
+	}
+	if inpututil.IsKeyJustPressed(ebiten.KeyArrowDown) {
+		zoomIn = false
 	}
 	g.p.Update()
 	g.c.setPos(g.p.player.x/unit-320, g.p.player.y/unit-240)
@@ -60,13 +67,19 @@ func (g *Game) Draw(screen *ebiten.Image) {
 			for i, t := range l {
 				op := &ebiten.DrawImageOptions{}
 				op.GeoM.Translate(float64((i%xCount)*tileSize), float64((i/xCount)*tileSize))
+				if zoomIn {
+					op.GeoM.Scale(2, 2)
+
+				} else {
+					op.GeoM.Scale(1, 1)
+				}
 
 				sx := (t % tileXCount) * tileSize
 				sy := (t / tileXCount) * tileSize
 				g.c.draw(assets.Tilemap.SubImage(image.Rect(sx, sy, sx+tileSize, sy+tileSize)).(*ebiten.Image), op)
 			}
 		}
-		g.p.Draw(screen, g.c)
+		g.p.Draw(screen, g.c, g)
 	}
 	g.c.render(screen)
 	g.c.clear()

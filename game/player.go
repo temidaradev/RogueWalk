@@ -36,7 +36,6 @@ func (c *char) update() {
 
 type Player struct {
 	player *char
-	op     ebiten.DrawImageOptions
 }
 
 func (p *Player) Update() error {
@@ -59,7 +58,8 @@ func (p *Player) Update() error {
 }
 
 func (p *Player) Draw(screen *ebiten.Image, cam *camera, g *Game) {
-	p.op.GeoM.Translate(float64(p.player.x)/unit, float64(p.player.y)/unit)
+	op := &ebiten.DrawImageOptions{}
+	op.GeoM.Translate(float64(p.player.x)/unit, float64(p.player.y)/unit)
 
-	cam.draw(assets.Chars, &p.op)
+	cam.draw(assets.Chars, op)
 }

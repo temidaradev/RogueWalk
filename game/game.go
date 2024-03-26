@@ -66,12 +66,14 @@ func (g *Game) Draw(screen *ebiten.Image) {
 		for _, l := range g.layers {
 			for i, t := range l {
 				op := &ebiten.DrawImageOptions{}
-				op.GeoM.Translate(float64((i%xCount)*tileSize), float64((i/xCount)*tileSize))
 				if zoomIn {
+					op.GeoM.Translate(-screenWidth/2, -screenHeight/2)
 					op.GeoM.Scale(2, 2)
-
+					op.GeoM.Translate(float64((i%xCount)*tileSize*2), float64((i/xCount)*tileSize*2))
 				} else {
+					op.GeoM.Translate(-screenWidth/2, -screenHeight/2)
 					op.GeoM.Scale(1, 1)
+					op.GeoM.Translate(float64((i%xCount)*tileSize), float64((i/xCount)*tileSize))
 				}
 
 				sx := (t % tileXCount) * tileSize

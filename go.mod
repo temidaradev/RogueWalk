@@ -2,7 +2,16 @@ module main
 
 go 1.22.0
 
-require github.com/hajimehoshi/ebiten/v2 v2.7.0-alpha.9
+require (
+	github.com/hajimehoshi/ebiten/v2 v2.7.0-alpha.9
+	github.com/solarlune/ldtkgo v0.9.3
+)
+
+require (
+	github.com/tidwall/gjson v1.6.4 // indirect
+	github.com/tidwall/match v1.0.1 // indirect
+	github.com/tidwall/pretty v1.0.2 // indirect
+)
 
 require (
 	github.com/ebitengine/gomobile v0.0.0-20240223151600-9f1d75a9f41c // indirect

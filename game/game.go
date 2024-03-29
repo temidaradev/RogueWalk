@@ -58,7 +58,7 @@ func (g *Game) Draw(screen *ebiten.Image) {
 	if !isStarted {
 		g.m.Draw(screen)
 	} else {
-		screen.Fill(color.RGBA{133, 198, 106, 255})
+		screen.Fill(color.RGBA{133, 18, 106, 255})
 		w := assets.Tilemap.Bounds().Dx()
 		tileXCount := w / tileSize
 

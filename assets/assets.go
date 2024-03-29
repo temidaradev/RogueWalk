@@ -87,7 +87,7 @@ func getSingleImage(name string) *ebiten.Image {
 
 var (
 	ldtkProject    *ldtkgo.Project
-	ebitenRenderer *ebitenrenderer.EbitenRenderer
+	ebitenRenderer *EbitenRenderer
 )
 
 func getLDTK(name string) {

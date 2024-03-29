@@ -14,6 +14,7 @@ type Game struct {
 	m      *menu
 	p      *Player
 	c      *camera
+	a      *assets.Assets
 }
 
 func NewGame() *Game {
@@ -22,6 +23,7 @@ func NewGame() *Game {
 		&menu{},
 		&Player{},
 		&camera{},
+		&assets.Assets{},
 	}
 	g.c.init()
 	return g

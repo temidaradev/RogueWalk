@@ -12,7 +12,11 @@ import (
 )
 
 type Assets struct {
-	Layers [][]int
+	Layers         [][]int
+	ldtkProject    *ldtkgo.Project
+	ebitenRenderer *EbitenRenderer
+	CurrentLevel   int
+	ActiveLayers   []bool
 }
 
 //go:embed *
@@ -85,24 +89,16 @@ func getSingleImage(name string) *ebiten.Image {
 	return ebiten.NewImageFromImage(img)
 }
 
-var (
-	ldtkProject    *ldtkgo.Project
-	ebitenRenderer *EbitenRenderer
-)
-
-func getLDTK(name string) {
-	ldtkProject, err := ldtkgo.Open(name)
+func (a *Assets) getLDTK() {
+	ldtkProject, err := ldtkgo.Open("Sprites/helpme.ldtk")
 	if err != nil {
 		log.Fatal(err)
 	}
 
 	level := ldtkProject.Levels[0]
 
-	// Create a new renderer...
-	ebitenRenderer = ebitenrenderer.NewEbitenRenderer()
-
 	// ... And render the tiles for the level out to layers, which will be *ebiten.Images. We'll retrieve them to draw in a Draw() loop later.
-	ebitenRenderer.Render(level)
+	a.ebitenRenderer.Render(level)
 }
 
 func mustSubImage(tileSetImage *ebiten.Image, ts tiled.Tileset, id uint32) *ebiten.Image {

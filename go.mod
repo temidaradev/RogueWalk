@@ -8,6 +8,7 @@ require (
 )
 
 require (
+	github.com/disintegration/imaging v1.6.2 // indirect
 	github.com/tidwall/gjson v1.6.4 // indirect
 	github.com/tidwall/match v1.0.1 // indirect
 	github.com/tidwall/pretty v1.0.2 // indirect

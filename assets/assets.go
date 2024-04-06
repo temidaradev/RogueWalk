@@ -2,21 +2,20 @@ package assets
 
 import (
 	"embed"
+	"fmt"
 	"image"
 	_ "image/png"
 	"log"
 
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/lafriks/go-tiled"
-	"github.com/solarlune/ldtkgo"
+	"github.com/lafriks/go-tiled/render"
 )
 
 type Assets struct {
-	Layers         [][]int
-	ldtkProject    *ldtkgo.Project
-	ebitenRenderer *EbitenRenderer
-	CurrentLevel   int
-	ActiveLayers   []bool
+	Layers       [][]int
+	CurrentLevel int
+	ActiveLayers []bool
 }
 
 //go:embed *
@@ -24,6 +23,7 @@ var assets embed.FS
 
 var Tilemap = getSingleImage("Sprites/tilemap.png")
 var Chars = getSingleImage("Sprites/chars.png")
+var Tile = getTiled("Sprites/tile.tmx")
 
 var Layers [][]int
 
@@ -89,18 +89,6 @@ func getSingleImage(name string) *ebiten.Image {
 	return ebiten.NewImageFromImage(img)
 }
 
-func (a *Assets) getLDTK() {
-	ldtkProject, err := ldtkgo.Open("Sprites/helpme.ldtk")
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	level := ldtkProject.Levels[0]
-
-	// ... And render the tiles for the level out to layers, which will be *ebiten.Images. We'll retrieve them to draw in a Draw() loop later.
-	a.ebitenRenderer.Render(level)
-}
-
 func mustSubImage(tileSetImage *ebiten.Image, ts tiled.Tileset, id uint32) *ebiten.Image {
 	width := ts.TileWidth
 	height := ts.TileHeight
@@ -122,4 +110,29 @@ func mustSubImage(tileSetImage *ebiten.Image, ts tiled.Tileset, id uint32) *ebit
 	return tileSetImage.SubImage(
 		image.Rect(sx, sy, sx+ts.TileWidth, sy+ts.TileHeight),
 	).(*ebiten.Image)
+}
+
+func getTiled(name string) *ebiten.Image {
+	gameMap, err := tiled.LoadFile(name)
+	if err != nil {
+		fmt.Printf("error parsing map: %s", err.Error())
+	}
+
+	fmt.Println(gameMap)
+
+	renderer, err := render.NewRenderer(gameMap)
+	if err != nil {
+		fmt.Printf("map unsupported for rendering: %s", err.Error())
+	}
+
+	err = renderer.RenderLayer(0)
+	if err != nil {
+		fmt.Printf("layer unsupported for rendering: %s", err.Error())
+	}
+
+	img := renderer.Result
+
+	renderer.Clear()
+
+	return ebiten.NewImageFromImage(img)
 }

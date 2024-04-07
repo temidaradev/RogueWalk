@@ -6,6 +6,7 @@ import (
 	"image"
 	_ "image/png"
 	"log"
+	"os"
 
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/lafriks/go-tiled"
@@ -23,7 +24,7 @@ var assets embed.FS
 
 var Tilemap = getSingleImage("Sprites/tilemap.png")
 var Chars = getSingleImage("Sprites/chars.png")
-var Tile = getTiled("Sprites/tile.tmx")
+var Tile = getTiled("./assets/Sprites/tile.tmx")
 
 var Layers [][]int
 
@@ -116,6 +117,7 @@ func getTiled(name string) *ebiten.Image {
 	gameMap, err := tiled.LoadFile(name)
 	if err != nil {
 		fmt.Printf("error parsing map: %s", err.Error())
+		os.Exit(2)
 	}
 
 	fmt.Println(gameMap)
@@ -123,16 +125,21 @@ func getTiled(name string) *ebiten.Image {
 	renderer, err := render.NewRenderer(gameMap)
 	if err != nil {
 		fmt.Printf("map unsupported for rendering: %s", err.Error())
+		os.Exit(2)
 	}
 
+	// Render just layer 0 to the Renderer.
 	err = renderer.RenderLayer(0)
 	if err != nil {
 		fmt.Printf("layer unsupported for rendering: %s", err.Error())
+		os.Exit(2)
 	}
 
+	// Get a reference to the Renderer's output, an image.NRGBA struct.
 	img := renderer.Result
 
-	renderer.Clear()
+	// Clear the render result after copying the output if separation of
+	// layers is desired.
 
 	return ebiten.NewImageFromImage(img)
 }

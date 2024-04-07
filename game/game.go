@@ -1,6 +1,7 @@
 package game
 
 import (
+	"image/color"
 	"main/assets"
 
 	"github.com/hajimehoshi/ebiten/v2"
@@ -55,12 +56,11 @@ func (g *Game) Update() error {
 }
 
 func (g *Game) Draw(screen *ebiten.Image) {
-	screen.DrawImage(assets.Tile, &ebiten.DrawImageOptions{})
-	/*
-		if !isStarted {
-			g.m.Draw(screen)
-		} else {
-			screen.Fill(color.RGBA{133, 18, 106, 255})
+	if !isStarted {
+		g.m.Draw(screen)
+	} else {
+		screen.Fill(color.RGBA{133, 18, 106, 255})
+		/*
 			w := assets.Tilemap.Bounds().Dx()
 			tileXCount := w / tileSize
 
@@ -82,10 +82,12 @@ func (g *Game) Draw(screen *ebiten.Image) {
 					sy := (t / tileXCount) * tileSize
 					g.c.draw(assets.Tilemap.SubImage(image.Rect(sx, sy, sx+tileSize, sy+tileSize)).(*ebiten.Image), op)
 				}
+
 			}
-			g.p.Draw(screen, g.c, g)
-		}
-	*/
+		*/
+		g.c.draw(assets.Tile, &ebiten.DrawImageOptions{})
+		g.p.Draw(screen, g.c, g)
+	}
 	g.c.render(screen)
 	g.c.clear()
 }

@@ -140,5 +140,7 @@ func getTiled(name string) *ebiten.Image {
 	// Clear the render result after copying the output if separation of
 	// layers is desired.
 
+	renderer.Clear()
+
 	return ebiten.NewImageFromImage(img)
 }

@@ -21,7 +21,7 @@ type Assets struct {
 //go:embed *
 var assets embed.FS
 
-var Tilemap = getSingleImage("Sprites/tilemap.png")
+// var Tilemap = getSingleImage("Sprites/tilemap.png")
 var Chars = getSingleImage("Sprites/chars.png")
 var Tile = getTiled("./assets/Sprites/tile.tmx")
 

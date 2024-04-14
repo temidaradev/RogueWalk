@@ -6,6 +6,7 @@ import (
 	"image"
 	_ "image/png"
 	"log"
+	"os"
 
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/lafriks/go-tiled"
@@ -116,7 +117,7 @@ func getTiled(name string) *ebiten.Image {
 	gameMap, err := tiled.LoadFile(name)
 	if err != nil {
 		fmt.Printf("error parsing map: %s", err.Error())
-		//os.Exit(2)
+		os.Exit(2)
 	}
 
 	fmt.Println(gameMap)
@@ -124,14 +125,14 @@ func getTiled(name string) *ebiten.Image {
 	renderer, err := render.NewRenderer(gameMap)
 	if err != nil {
 		fmt.Printf("map unsupported for rendering: %s", err.Error())
-		//os.Exit(2)
+		os.Exit(2)
 	}
 
 	// Render just layer 0 to the Renderer.
 	err = renderer.RenderLayer(0)
 	if err != nil {
 		fmt.Printf("layer unsupported for rendering: %s", err.Error())
-		//os.Exit(2)
+		os.Exit(2)
 	}
 
 	// Get a reference to the Renderer's output, an image.NRGBA struct.

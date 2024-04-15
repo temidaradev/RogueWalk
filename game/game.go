@@ -59,33 +59,11 @@ func (g *Game) Draw(screen *ebiten.Image) {
 	if !isStarted {
 		g.m.Draw(screen)
 	} else {
-		screen.Fill(color.RGBA{133, 18, 106, 255})
-		/*
-			w := assets.Tilemap.Bounds().Dx()
-			tileXCount := w / tileSize
-
-			const xCount = screenWidth / tileSize
-			for _, l := range g.layers {
-				for i, t := range l {
-					op := &ebiten.DrawImageOptions{}
-					op.GeoM.Scale(2, 2)
-					op.GeoM.Translate(float64((i%xCount)*tileSize*2), float64((i/xCount)*tileSize*2))
-					// if zoomIn {
-					// 	op.GeoM.Scale(2, 2)
-					// 	op.GeoM.Translate(float64((i%xCount)*tileSize*2), float64((i/xCount)*tileSize*2))
-					// } else {
-					// 	op.GeoM.Scale(1, 1)
-					// 	op.GeoM.Translate(float64((i%xCount)*tileSize), float64((i/xCount)*tileSize))
-					// }
-
-					sx := (t % tileXCount) * tileSize
-					sy := (t / tileXCount) * tileSize
-					g.c.draw(assets.Tilemap.SubImage(image.Rect(sx, sy, sx+tileSize, sy+tileSize)).(*ebiten.Image), op)
-				}
-
-			}
-		*/
-		g.c.draw(assets.Tile, &ebiten.DrawImageOptions{})
+		screen.Fill(color.RGBA{110, 200, 92, 1})
+		op := &ebiten.DrawImageOptions{}
+		op.GeoM.Scale(1.5, 1.5)
+		op.GeoM.Translate(-screenWidth/2, -screenHeight/2)
+		g.c.draw(assets.Tile, op)
 		g.p.Draw(screen, g.c, g)
 	}
 	g.c.render(screen)

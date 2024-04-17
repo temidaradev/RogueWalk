@@ -59,7 +59,7 @@ func (g *Game) Draw(screen *ebiten.Image) {
 	if !isStarted {
 		g.m.Draw(screen)
 	} else {
-		screen.Fill(color.RGBA{110, 200, 92, 1})
+		screen.Fill(color.RGBA{132, 198, 105, 255})
 		op := &ebiten.DrawImageOptions{}
 		op.GeoM.Scale(1.5, 1.5)
 		op.GeoM.Translate(-screenWidth/2, -screenHeight/2)

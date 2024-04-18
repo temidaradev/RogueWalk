@@ -53,6 +53,20 @@ func (p *Player) Update() error {
 		p.player.vx = 4 * unit
 	}
 
+	if p.player.x <= -3200 {
+		p.player.x = -3200
+	}
+	if p.player.x >= 37400 {
+		p.player.x = 37400
+	}
+
+	if p.player.y <= -2350 {
+		p.player.y = -2350
+	}
+	if p.player.y >= 38200 {
+		p.player.y = 38200
+	}
+
 	p.player.update()
 	return nil
 }

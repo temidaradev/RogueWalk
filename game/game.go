@@ -1,10 +1,12 @@
 package game
 
 import (
+	"fmt"
 	"image/color"
 	"main/assets"
 
 	"github.com/hajimehoshi/ebiten/v2"
+	"github.com/hajimehoshi/ebiten/v2/ebitenutil"
 	"github.com/hajimehoshi/ebiten/v2/inpututil"
 )
 
@@ -61,13 +63,15 @@ func (g *Game) Draw(screen *ebiten.Image) {
 	} else {
 		screen.Fill(color.RGBA{132, 198, 105, 255})
 		op := &ebiten.DrawImageOptions{}
-		op.GeoM.Scale(1.5, 1.5)
+		op.GeoM.Scale(1, 1)
 		op.GeoM.Translate(-screenWidth/2, -screenHeight/2)
 		g.c.draw(assets.Tile, op)
 		g.p.Draw(screen, g.c, g)
 	}
 	g.c.render(screen)
 	g.c.clear()
+	msg := fmt.Sprintf("Pos X: %d Pos Y: %d", g.p.player.x/unit, g.p.player.y/unit)
+	ebitenutil.DebugPrint(screen, msg)
 }
 
 func (g *Game) Layout(outsideWidth, outsideHeight int) (int, int) {

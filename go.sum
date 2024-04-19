@@ -33,6 +33,8 @@ github.com/pmezard/go-difflib v1.0.0 h1:4DBwDE0NGyQoBHbLQYPwSUPoCMWR5BEzIk/f1lZb
 github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=
 github.com/solarlune/ldtkgo v0.9.3 h1:pPgbO68AlhRzb9hynGoWxuZpYkmxmG0bjuFYpTdH9rQ=
 github.com/solarlune/ldtkgo v0.9.3/go.mod h1:rpW/4FW9wOJR9JVpA67mbCfllBsg6ZvCFZnVtfokdFc=
+github.com/solarlune/resolv v0.7.0 h1:xppOLy3hRy9AB5khJVVUlwiWdFZGSLwAOODAoZ6508A=
+github.com/solarlune/resolv v0.7.0/go.mod h1:rUQ1j+RndaUwwrSgl585tAp2uu7Zj7TG5mXq+x6hX/w=
 github.com/stretchr/testify v1.8.2 h1:+h33VjcLVPDHtOdpUCuF+7gSuG3yGIftsP1YvFihtJ8=
 github.com/stretchr/testify v1.8.2/go.mod h1:w2LPCIKwWwSfY2zedu0+kehJoqGctiVI29o6fzry7u4=
 github.com/tidwall/gjson v1.6.4 h1:JKsCsJqRVFz8eYCsQ5E/ANRbK6CanAtA9IUvGsXklyo=

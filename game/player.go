@@ -73,7 +73,7 @@ func (p *Player) Update() error {
 
 func (p *Player) Draw(screen *ebiten.Image, cam *camera, g *Game) {
 	op := &ebiten.DrawImageOptions{}
-	op.GeoM.Scale(2, 2)
+	op.GeoM.Scale(1.5, 1.5)
 	op.GeoM.Translate(float64(p.player.x)/unit, float64(p.player.y)/unit)
 	// if zoomIn {
 	// 	op.GeoM.Scale(3, 3)

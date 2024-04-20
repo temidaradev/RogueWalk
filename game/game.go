@@ -11,16 +11,14 @@ import (
 )
 
 type Game struct {
-	layers [][]int
-	m      *menu
-	p      *Player
-	c      *camera
-	a      *assets.Assets
+	m *menu
+	p *Player
+	c *camera
+	a *assets.Assets
 }
 
 func NewGame() *Game {
 	g := &Game{
-		assets.L.Layers,
 		&menu{},
 		&Player{},
 		&camera{},
@@ -63,8 +61,8 @@ func (g *Game) Draw(screen *ebiten.Image) {
 	} else {
 		screen.Fill(color.RGBA{132, 198, 105, 255})
 		op := &ebiten.DrawImageOptions{}
-		op.GeoM.Scale(1, 1)
-		op.GeoM.Translate(-screenWidth/2, -screenHeight/2)
+		op.GeoM.Scale(1.2, 1.2)
+		//op.GeoM.Translate(-screenWidth/2, -screenHeight/2)
 		g.c.draw(assets.Tile, op)
 		g.p.Draw(screen, g.c, g)
 	}

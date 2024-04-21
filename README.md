@@ -1,3 +1,3 @@
-# Shh! 🤫
+# Rogue Walk
 
-TODO: Tilemap settings
+Rogue Walk is my first simple roguelike game prototype.

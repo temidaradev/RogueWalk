@@ -62,7 +62,7 @@ func (g *Game) Draw(screen *ebiten.Image) {
 		screen.Fill(color.RGBA{132, 198, 105, 255})
 		op := &ebiten.DrawImageOptions{}
 		op.GeoM.Scale(1.2, 1.2)
-		//op.GeoM.Translate(-screenWidth/2, -screenHeight/2)
+		op.GeoM.Translate(-screenWidth, -screenHeight)
 		g.c.draw(assets.Tile, op)
 		g.p.Draw(screen, g.c, g)
 	}

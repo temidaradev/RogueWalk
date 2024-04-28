@@ -37,11 +37,20 @@ func (m *menu) Draw(screen *ebiten.Image) {
 
 func (m *menu) title(screen *ebiten.Image) {
 	op := &text.DrawOptions{}
-	op.GeoM.Translate(160, 60)
+	op.GeoM.Translate(175, 60)
 	op.ColorScale.ScaleWithColor(color.RGBA{255, 255, 255, 255})
 
-	text.Draw(screen, "Mystery Game", &text.GoTextFace{
+	text.Draw(screen, "Rogue Walk", &text.GoTextFace{
 		Source: fontFaceSource,
 		Size:   bigFontSize,
 	}, op)
+
+	op2 := &text.DrawOptions{}
+	op2.GeoM.Translate(83, 250)
+	op2.ColorScale.ScaleWithColor(color.RGBA{255, 255, 255, 255})
+
+	text.Draw(screen, "You Can Start The Journey By Bressing Enter", &text.GoTextFace{
+		Source: fontFaceSource,
+		Size:   normalFontSize,
+	}, op2)
 }

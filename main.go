@@ -9,6 +9,10 @@ import (
 
 func main() {
 	g := game.NewGame()
+
+	ebiten.SetWindowTitle("Quest")
+	ebiten.SetWindowResizingMode(ebiten.WindowResizingModeEnabled)
+
 	if err := ebiten.RunGame(g); err != nil {
 		log.Fatal(err)
 	}

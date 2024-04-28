@@ -29,26 +29,15 @@ func NewGame() *Game {
 }
 
 var isStarted bool
-var zoomIn, zoomOut bool
 
 const (
 	screenWidth  = 640
 	screenHeight = 480
 )
 
-const (
-	tileSize = 16
-)
-
 func (g *Game) Update() error {
 	if inpututil.IsKeyJustPressed(ebiten.KeyEnter) {
 		isStarted = true
-	}
-	if inpututil.IsKeyJustPressed(ebiten.KeyArrowUp) {
-		zoomIn = true
-	}
-	if inpututil.IsKeyJustPressed(ebiten.KeyArrowDown) {
-		zoomIn = false
 	}
 	g.p.Update()
 	g.c.setPos(g.p.player.x/unit-320, g.p.player.y/unit-240)
